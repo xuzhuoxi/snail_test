@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-const UserCount = 300
+const UserCount = 200 //服务器与测试程序运行在同一ip下,可用端口可能只有300个左右
 
 var (
 	UserIds     []string
@@ -38,6 +38,7 @@ func init() {
 }
 
 func TestClient(t *testing.T) {
+	fmt.Println("TestClient")
 	TestLogin(t)
 	for {
 		time.Sleep(time.Second)
@@ -50,12 +51,14 @@ func TestLogin(t *testing.T) {
 	for _, val := range UserClients {
 		val.TestLoginExtension()
 	}
+	fmt.Println("TestLogin", len(UserClients))
 }
 
 func TestReLogin(t *testing.T) {
 	for _, val := range UserClients {
 		val.TestReLoginExtension()
 	}
+	fmt.Println("TestReLogin", len(UserClients))
 }
 
 //
