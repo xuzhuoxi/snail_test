@@ -8,6 +8,7 @@ package client
 import (
 	"fmt"
 	"github.com/xuzhuoxi/snail_test/src/client/internel"
+	"math/rand"
 	"sync"
 	"testing"
 	"time"
@@ -61,19 +62,21 @@ func TestReLogin(t *testing.T) {
 	fmt.Println("TestReLogin", len(UserClients))
 }
 
-//
-//func startClient(uc *userClient) {
-//	go mgrAtRobot(uc)
-//}
-//
-//func mgrAtRobot(uc *userClient) {
-//	if err := uc.Open(); err != nil {
-//		fmt.Println(err)
-//		return
-//	}
-//	uc.TestLoginExtension()
-//	for {
-//		time.Sleep(time.Second)
-//		uc.TestReLoginExtension()
-//	}
-//}
+func TestPressure(t *testing.T) {
+	for _, val := range UserClients {
+		go mgrAtRobot(val)
+	}
+	<-sleep
+}
+
+func mgrAtRobot(uc *internel.UserClient) {
+	if err := uc.Open(); err != nil {
+		fmt.Println(err)
+		return
+	}
+	uc.TestLoginExtension()
+	for {
+		time.Sleep(time.Millisecond * time.Duration(rand.Int63n(100)))
+		uc.TestReLoginExtension()
+	}
+}

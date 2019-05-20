@@ -12,11 +12,13 @@ import (
 )
 
 const (
-	RemoteAddress = "127.0.0.1:31000"
-	Network       = netx.TcpNetwork
+	RemoteAddress0 = "127.0.0.1:31000"
+	RemoteAddress1 = "127.0.0.1:32000"
+	Network        = netx.TcpNetwork
 )
 
 var ClientCreator = netx.NewTCPClient
+var count = 0
 
 func NewUserClient(uId string) *UserClient {
 	client := ClientCreator()
@@ -29,7 +31,15 @@ type UserClient struct {
 }
 
 func (uc *UserClient) Open() error {
-	return uc.SockClient.OpenClient(netx.SockParams{RemoteAddress: RemoteAddress, Network: Network})
+	var remoteAddr string
+	if count == 0 {
+		remoteAddr = RemoteAddress0
+		count = 1
+	} else {
+		remoteAddr = RemoteAddress1
+		count = 0
+	}
+	return uc.SockClient.OpenClient(netx.SockParams{RemoteAddress: remoteAddr, Network: Network})
 }
 
 func (uc *UserClient) TestLoginExtension() {

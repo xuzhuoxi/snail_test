@@ -23,19 +23,19 @@
       "id": "game0", "module": "game",
       "rpc": ["rpc_game0"],
       "socks": ["out_game0"],
-      "remotes":["rpc_route0"],
+      "remotes": ["rpc_route0"],
       "log": "game/game0.log"
     }, {
       "id": "game1", "module": "game",
       "rpc": ["rpc_game1"],
       "socks": ["out_game1"],
-      "remotes":["rpc_route0"],
+      "remotes": ["rpc_route0"],
       "log": "game/game1.log"
     }, {
       "id": "game2", "module": "game",
       "rpc": ["rpc_game2"],
       "socks": ["out_game2"],
-      "remotes":["rpc_route0"],
+      "remotes": ["rpc_route0"],
       "log": "game/game2.log"
     }
   ],
@@ -47,5 +47,5 @@
       "log": "admin/admin0.log"
     }
   ],
-  "onList": ["route0","game0","game1"]
+  "onList": ["route0", "game0", "game1"]
 }
