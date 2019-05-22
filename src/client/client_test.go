@@ -52,6 +52,7 @@ func TestLogin(t *testing.T) {
 	for _, val := range UserClients {
 		val.TestLoginExtension()
 	}
+	time.Sleep(time.Second)
 	fmt.Println("TestLogin", len(UserClients))
 }
 
@@ -59,6 +60,7 @@ func TestReLogin(t *testing.T) {
 	for _, val := range UserClients {
 		val.TestReLoginExtension()
 	}
+	time.Sleep(time.Second)
 	fmt.Println("TestReLogin", len(UserClients))
 }
 
@@ -75,8 +77,10 @@ func mgrAtRobot(uc *internel.UserClient) {
 		return
 	}
 	uc.TestLoginExtension()
+	rt := time.Second * time.Duration(rand.Int63n(20))
 	for {
-		time.Sleep(time.Millisecond * time.Duration(rand.Int63n(100)))
+		time.Sleep(rt)
+		fmt.Println(uc.UserId, "ReLogin")
 		uc.TestReLoginExtension()
 	}
 }
